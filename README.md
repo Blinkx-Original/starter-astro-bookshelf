@@ -2,7 +2,7 @@
 
 Create your bookshelf with [Contentful](https://contentful.com) and [Astro](https://astro.build/).
 
-## Demo
+## Demo:
 
 [Link](https://astro-bookshelf.netlify.app/)
 
