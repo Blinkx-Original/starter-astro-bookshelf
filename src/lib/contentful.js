@@ -24,7 +24,7 @@ async function apiCall(query, variables) {
 }
 
 export async function getAllBooks(limit = 100) {
-  const query = /* GraphQL */ `
+  const query = `
     query Books($limit: Int!) {
       bookReferencePageCollection(limit: $limit) {
         items {
@@ -36,7 +36,12 @@ export async function getAllBooks(limit = 100) {
       }
     }
   `;
-  const json = await apiCall(query, { limit });
-  const items = json?.data?.bookReferencePageCollection?.items ?? [];
-  return items;
+  try {
+    const json = await apiCall(query, { limit });
+    // si la colección no existe o viene vacía, devolvemos []
+    return json?.data?.bookReferencePageCollection?.items ?? [];
+  } catch (e) {
+    console.error('getAllBooks failed', e);
+    return [];
+  }
 }
